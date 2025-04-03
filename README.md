@@ -36,4 +36,47 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
 - Docker Installed from the previous demo.
 - Private key PEM file for SSS with EC2 from the previous demo.
 
-## ⚙️  Project Configuration
+## ⚙️ Project Configuration
+
+### Creating a Multibranch pipeline & Adding SSH credentials
+1. Create a new Multibranch pipeline.
+2. Name the new multibranch pipeline aws-multibranch-pipeline.
+3. Configure the Branch source: add the git repository (GitLab), add the credentials to access gitlab, add a behavior to filter by name the branches an use the .* regular expression.
+4. Click on the Credentials panel on the left.
+5. Click on the aws multibranch under the store scoped to aws-multibranch-pipeline section
+6. Click on Add credentials.
+7. On the new credentials section in the kind field select SSH username with private key.
+8. Add the ID for the credentials and username ec2-user.
+9. Enter a key directly and copy and paste the private key from the PEM file from the previous demo.
+
+### Installing SSHAgent Plugin
+1. Navigate to the Jenkins server.
+2. Click on the Dashboard and go to manage Jenkins.
+3. Select Plugin and Install the SSHAgent plugin.
+
+### Verifying EC2
+1. Go to the command line and SSH to the EC2.
+2. Stop all previous containers.
+3. Ensure that the EC2 has no images.
+4. Login to Docker using the docker login command.
+   
+### Deploying the WebApp
+1. Go to the AWS multibranch pipeline.
+2. Select pipeline syntax on the left.
+3. On the overview section select sshagent: SSH agent
+4. Add the ec2-user.
+5. Click on Generate Pipeline Script.
+6. Select the script.
+7. Go to the java-maven application and open the Jenkinsfile.
+8. Add a deployment step and copy the script.
+9. Modify the script by adding the SSH command to access EC2 and the docker run command.
+10. Commit changes to the repository.
+11. Check EC2 for new images.
+12. Check the current container.
+
+### Modyfing Inboud rules to Security group.
+1. Navigate to the EC2 instance from the WebUI.
+2. Click on Security Groups and edit the inbound rules to allow SSH access from Jenkins server and public access to the WebApp.
+3. Check WebApplication using the public IP of the EC2 and the application port.
+    
+
