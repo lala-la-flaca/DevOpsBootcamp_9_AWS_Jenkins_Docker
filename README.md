@@ -7,22 +7,22 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
 
 ## 🚀 Technologies Used
 
-- <b>Docker: Docker for containerization.</b>
-- <b>AWS EC2: Cloud provider for hosting WebApp.</b>
-- <b>Linux: Ubuntu for Server configuration and management.</b>
-- <b>DockerHub: Private docker repository.</b>
-- <b>Git: Version Control System<b/>
-- <b>GitLab: Git Repository<b/>
-- <b>Java & Maven: Nana's application and build tools<b/>
+- **Docker**: Docker for containerization.
+- **AWS EC2**: Cloud provider for hosting WebApp.
+- **Linux**: Ubuntu is used for server configuration and management.
+- **DockerHub**: Private docker repository.
+- **Git**: Version Control System.
+- **GitLab**: Git Repository.
+- **Java & Maven**: Nana's application and build tools.
   
 
 ## 🎯 Features
 
-- Automated Deployment: Deploys application updates directly from Jenkins to EC2.
-- Secure SSH Access: Uses Jenkins credentials to securely connect to the EC2 instance.
-- Dockerized Application: Builds and runs the application in a Docker container.
-- Pipeline Integration: Extends the CI process to include deployment.
-- Security Group Configuration: Ensures proper access to the deployed application.
+- **Automated Deployment**: Deploys application updates directly from Jenkins to EC2.
+- **Secure SSH Access**: Uses Jenkins credentials to securely connect to the EC2 instance.
+- **Dockerized Application**: Builds and runs the application in a Docker container.
+- **Pipeline Integration**: Extends the CI process to include deployment.
+- **Security Group Configuration**: Ensures proper access to the deployed application.
 
 
 ## 🏗 Project Architecture
