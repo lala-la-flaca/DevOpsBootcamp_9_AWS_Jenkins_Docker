@@ -42,7 +42,7 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
 1. Create a new Multibranch pipeline.   
 2. Name the new multibranch pipeline aws-multibranch-pipeline.
 
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/3%20Create%20a%20New%20aws%20multibranch%20pipeline.png" width=800 />
    
 3. Configure the Branch source:
    * Add the git repository (GitLab).
@@ -50,18 +50,19 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
    * Define a behavior to filter branches by name using the .* regular expression.
 
   
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/4%20Creating%20multibranch%20pipeline%202.png" width=800 />
    
 4. In Jenkins, navigate to the Credentials panel on the left.
 
-   
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/5%20Adding%20aws%20pipeline%20credentials%20scope.png" width=800 />
    
 5. Select aws-multibranch under the Store scoped to aws-multibranch-pipeline section.
    
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/5%20Adding%20aws%20pipeline%20credentials%20scope%20glbal.png" width=800 />
    
 6. Click Add Credentials.
+   
+   <img src= "https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/6%20add%20credentials.png" width=800 />
    
 7. In the New Credentials section:
    * Set Kind to SSH Username with Private Key.
@@ -71,7 +72,7 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
      
 8. Save the configuration.
 
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/7%20saving%20ssh%20private%20key%20credentials.png" width=800 />
    
 
 
@@ -79,11 +80,11 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
 1. Navigate to the Jenkins server.
 2. On the Dashboard, click Manage Jenkins.
 
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/1%20Jenkins%20%20plugin.png" width=800 />
    
 4. Select Plugins and install the SSH Agent plugin.
 
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/2%20Installing%20SSH%20agents%20on%20Jenkins.png" width=800 />
    
 
 ### Verifying EC2
@@ -108,22 +109,22 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
      docker images   
    ```
 
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/13%20deleting%20old%20images%20from%20ec2.png" width=800 />
    
-6. Log in to Docker using the docker login command, as we are using DockerHub we do not need to specify the server. Otherwise, the command must include the server URL
+6. Log in to Docker using the docker login command, as we are using DockerHub we do not need to specify the server. Otherwise, the command must include the URL server
       
    ```bash
      docker login
    ```
 
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/12%20%20dockerloing%20on%20ec2.png" width=800 />
    
    
 ### Deploying the WebApp
 1. Open the AWS multibranch pipeline in Jenkins.
 2. Click Pipeline Syntax on the left panel.
    
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/9%20pipeline%20syntax.png" width=800 />
    
 3. In the Overview section, select sshagent: SSH Agent as the step type.
 4. Add ec2-user as the SSH credential.
@@ -135,7 +136,7 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
                       
                     }
    ```
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/10%20generate%20script%20for%20the%20ssh%20agent.png" width=800 />
    
 7. Navigate to the java-maven application repository and open the Jenkinsfile.
 8. Add a deployment step and paste the copied script.
@@ -156,17 +157,17 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
 
    ```
 
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/11%20Modifying%20dockerfile%20to%20ssh%20ec2.png" width=800 />
 
 11. Commit the changes to the repository.
+
+    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/15%20Build%20Pipeline%20Manually%20from%20jenkins.png" width=800 />
    
 12. Verify that the new Docker images are available on the EC2 instance.
 
     ```bash
       docker images
      ```
-
-    <img src="" width=800 />
    
 13. Check the status of the running container.
 
@@ -174,7 +175,7 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
       docker ps
     ```
 
-    <img src= "" width=800 />
+    <img src= "https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/15%20docker%20images%20and%20container%20up%20on%20ec2.png" width=800 />
 
 
 ### Modyfing Inboud rules to Security group.
@@ -187,13 +188,13 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
 5. Save the changes.
 
    
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/14%20Editing%20inboud%20security%20group%20to%20allow%20jenkins%20ssh%20ec2.png" width=800 />
    
 7. Open a browser and enter the EC2 public IP followed by the application port to verify that the WebApp is accessible.
 
    [WebApp-Ec2](http://13.59.163.202:3080/)
 
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/16%20App%20running%20on%20EC2%20from%20multibranch%20pipeline%20manually.png" width=800 />
 
  
 
