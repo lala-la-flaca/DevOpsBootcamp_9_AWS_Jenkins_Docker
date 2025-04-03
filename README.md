@@ -28,3 +28,12 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
 ## 🏗 Project Architecture
 
 <img src=""/>
+
+## 📝  Prerequisites
+- AWS account with permissions to launch EC2.
+- Jenkins server running.
+- GitLab repository including the application source code.
+- Docker Installed from the previous demo.
+- Private key PEM file for SSS with EC2 from the previous demo.
+
+## ⚙️  Project Configuration
