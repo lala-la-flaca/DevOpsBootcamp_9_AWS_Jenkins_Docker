@@ -49,7 +49,6 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
    * Add the credentials required to access Gitlab.
    * Define a behavior to filter branches by name using the .* regular expression.
 
-  
    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/4%20Creating%20multibranch%20pipeline%202.png" width=800 />
    
 4. In Jenkins, navigate to the Credentials panel on the left.
@@ -74,7 +73,6 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
 
    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/7%20saving%20ssh%20private%20key%20credentials.png" width=800 />
    
-
 
 ### Installing SSHAgent Plugin
 1. Navigate to the Jenkins server.
@@ -133,7 +131,7 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
 
    ```bash
    sshagent(['ec2-server-key']) {
-                      
+                      //code
                     }
    ```
    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/10%20generate%20script%20for%20the%20ssh%20agent.png" width=800 />
@@ -160,16 +158,22 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/11%20Modifying%20dockerfile%20to%20ssh%20ec2.png" width=800 />
 
 11. Commit the changes to the repository.
+    ```bash
+      git add .
+      git commit -m "Jenkins file with deployment step"
+      git push
+    ```
+12. Navigate to the Jenkins server and check the status of the pipeline.
 
     <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/15%20Build%20Pipeline%20Manually%20from%20jenkins.png" width=800 />
    
-12. Verify that the new Docker images are available on the EC2 instance.
+13. Verify that the new Docker images are available on the EC2 instance.
 
     ```bash
       docker images
      ```
    
-13. Check the status of the running container.
+14. Check the status of the running container.
 
     ```bash
       docker ps
@@ -187,7 +191,6 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
    * Add a rule to allow public access to the WebApp on its designated port.
 5. Save the changes.
 
-   
    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/14%20Editing%20inboud%20security%20group%20to%20allow%20jenkins%20ssh%20ec2.png" width=800 />
    
 7. Open a browser and enter the EC2 public IP followed by the application port to verify that the WebApp is accessible.
