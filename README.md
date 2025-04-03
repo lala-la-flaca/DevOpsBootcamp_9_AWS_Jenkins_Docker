@@ -40,11 +40,11 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
 
 ### Creating a Multibranch pipeline & Adding SSH credentials
 1. Create a new Multibranch pipeline.   
-3. Name the new multibranch pipeline aws-multibranch-pipeline.
+2. Name the new multibranch pipeline aws-multibranch-pipeline.
 
    <img src="" width=800 />
    
-5. Configure the Branch source:
+3. Configure the Branch source:
    * Add the git repository (GitLab).
    * Add the credentials required to access Gitlab.
    * Define a behavior to filter branches by name using the .* regular expression.
@@ -52,23 +52,24 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
   
    <img src="" width=800 />
    
-6. In Jenkins, navigate to the Credentials panel on the left.
+4. In Jenkins, navigate to the Credentials panel on the left.
 
    
    <img src="" width=800 />
    
-8. Select aws-multibranch under the Store scoped to aws-multibranch-pipeline section.
+5. Select aws-multibranch under the Store scoped to aws-multibranch-pipeline section.
    
    <img src="" width=800 />
    
-10. Click Add Credentials.
-11. In the New Credentials section:
+6. Click Add Credentials.
+   
+7. In the New Credentials section:
    * Set Kind to SSH Username with Private Key.
    * Enter an ID for the credentials.
    * Set Username to ec2-user.
    * Select Enter a key directly and paste the private key from the .pem file used in the previous demo.
-11. Save the configuration.
-
+     
+8. Save the configuration.
 
    <img src="" width=800 />
    
@@ -77,11 +78,11 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
 ### Installing SSHAgent Plugin
 1. Navigate to the Jenkins server.
 2. On the Dashboard, click Manage Jenkins.
-   
+
    <img src="" width=800 />
    
 4. Select Plugins and install the SSH Agent plugin.
-   
+
    <img src="" width=800 />
    
 
@@ -90,7 +91,7 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
    
    ```bash
      ssh -i ~/.ssh/docker-server.pem ec2-user@13.59.163.202
-     ```
+   ```
 
 3. Stop all running containers.
       
@@ -126,10 +127,10 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
    
    <img src="" width=800 />
    
-4. In the Overview section, select sshagent: SSH Agent as the step type.
-5. Add ec2-user as the SSH credential.
-6. Click Generate Pipeline Script to create the script.
-7. Copy the generated script.
+3. In the Overview section, select sshagent: SSH Agent as the step type.
+4. Add ec2-user as the SSH credential.
+5. Click Generate Pipeline Script to create the script.
+6. Copy the generated script.
 
    ```bash
    sshagent(['ec2-server-key']) {
@@ -138,9 +139,9 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
    ```
    <img src="" width=800 />
    
-9. Navigate to the java-maven application repository and open the Jenkinsfile.
-10. Add a deployment step and paste the copied script.
-11. Modify the script to include the SSH command for accessing the EC2 instance and the docker run command.
+7. Navigate to the java-maven application repository and open the Jenkinsfile.
+8. Add a deployment step and paste the copied script.
+9. Modify the script to include the SSH command for accessing the EC2 instance and the docker run command.
        
    ```bash
     stage("deploy") {
@@ -156,26 +157,27 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
         }               
 
    ```
-  <img src="" width=800 />
-
-13. Commit the changes to the repository.
-   
-14. Verify that the new Docker images are available on the EC2 instance.
-       
-   ```bash
-    docker images
-   ```
 
    <img src="" width=800 />
-   
-16. Check the status of the running container.
-       
-   ```bash
-    docker ps
-   ```
 
-   <img src="" width=800 />
+11. Commit the changes to the repository.
    
+12. Verify that the new Docker images are available on the EC2 instance.
+
+    ```bash
+      docker images
+     ```
+
+    <img src="" width=800 />
+   
+13. Check the status of the running container.
+
+    ```bash
+      docker ps
+    ```
+
+    <img src= "" width=800 />
+
 
 ### Modyfing Inboud rules to Security group.
 1. Open the AWS Management Console and navigate to the EC2 service.
