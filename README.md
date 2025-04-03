@@ -98,8 +98,6 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
    ```bash
      docker ps
      docker stop 695f76cb8e39
-     docker images
-     docker rmi -f 173a605dc5b4
    ```
 
 5. Remove any existing Docker images to ensure a clean environment.
