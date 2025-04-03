@@ -191,7 +191,7 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
    
 7. Open a browser and enter the EC2 public IP followed by the application port to verify that the WebApp is accessible.
 
-   [WebApp-Ec2)[http://13.59.163.202:3080/]
+   [WebApp-Ec2](http://13.59.163.202:3080/)
 
    <img src="" width=800 />
 
