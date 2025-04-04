@@ -201,3 +201,98 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
 
  
 
+### Deploying Java-Maven-App using a shared library
+1. Edit the Jenkinsfile to reference the shared library used in the previous demo.
+   <details><summary><strong> 💡 Using the Shared Library  </strong></summary>
+      Because the shared library was originally created using the java-maven-app directory structure, a new branch is required to support the AWS multibranch pipeline, which does not include this directory and places the pom.xml file in the root directory. To apply this difference, a new branch named aws-multibranch was created in the shared library. This section uses the aws-multibranch branch of the shared library to ensure compatibility with the AWS multibranch pipeline.
+  </details>
+  
+  ```bash
+         #!/usr/bin/env groovy
+          
+          //Defining the library only for specific project
+          
+          library identifier: 'jenkins-shared-library@aws-multibranch', retriever: modernSCM(
+              [$class: 'GitSCMSource',
+               remote: 'https://github.com/lala-la-flaca/DevOpsBootcamp_8_Jenkins_SharedLibrary.git',
+               credentialsId: 'github-credentials2'])
+          
+          
+          
+          pipeline {
+              agent any
+              tools{
+                  maven 'maven-3.9'
+              }
+          
+              environment{
+                  IMAGE_NAME = 'lala011/demo-app:jma-4.0'
+              }
+          
+              stages{
+          
+                   stage("build jar"){
+                       steps{
+                           script{
+                               echo 'building the application'
+                               buildJar()
+          
+                           }
+                        }
+                  }
+          
+                   stage("build and Push image") {
+                      steps {
+                          script {
+                              echo "building the docker image..."
+                              buildImage(env.IMAGE_NAME)
+                              dockerLogin()
+                              dockerPush(env.IMAGE_NAME)
+          
+                          }
+                      }
+                   }
+          
+          
+                  stage("deploy") {
+          
+                       steps {
+                          script {
+                              //gv.deployApp()
+                              echo "Deploying docker image to EC2"
+                              def dockerCmd = "docker run -p 8080:8080 -d ${IMAGE_NAME}"
+                              sshagent(['ec2-server-key']) {
+                                  sh "ssh -o StrictHostKeyChecking=no ec2-user@13.59.163.202 ${dockerCmd}"
+                              }
+          
+                          }
+                      }
+                  }
+          
+          
+              }
+          }
+  ```
+
+
+  <img src="" width=800 />
+
+2. Access the EC2 instance using SSH.
+3. Verify that the new Docker image and container are running.
+   
+   ```bash
+   docker images
+   docker ps
+   ```
+   <img src="" width=800 />
+   
+5. Update the EC2 security group to allow inbound access on the required port.
+
+   <img src="" width=800 />
+
+7. Access the App from the browser.
+
+   <img src="" width=800 />
+   
+   
+ 
