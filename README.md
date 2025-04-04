@@ -275,24 +275,30 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
   ```
 
 
-  <img src="" width=800 />
+  <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/21%20jenkinsfile%20updated%20with%20shared%20library.png" width=800 />
 
-2. Access the EC2 instance using SSH.
-3. Verify that the new Docker image and container are running.
+  <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/22%20jenkinsfile%20using%20sharelibrary.png" width=800 />
+
+2. Commit the changes and build the aws-multibranch-pipeline
+
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/17%20using%20shared%20library%20to%20ec2.PNG" width=800 />
+   
+4. Access the EC2 instance using SSH.
+5. Verify that the new Docker image and container are running.
    
    ```bash
    docker images
    docker ps
    ```
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/18%20checkig%20EC2%20with%20new%20images%20and%20new%20container.png" width=800 />
    
-5. Update the EC2 security group to allow inbound access on the required port.
+6. Update the EC2 security group to allow inbound access on the required port.
 
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/19%20editing%20inboud%20urles%20SG.png" width=800 />
 
 7. Access the App from the browser.
 
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/20%20java-maven%20app%20runing%20on%20ec2%20ok.png" width=800 />
    
    
  
