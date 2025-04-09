@@ -302,6 +302,7 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
    
    
  ### Using Docker-Compose
+ <a id="docker-compose"></a>
  1.  Install docker-compose on the EC2 instance.
 
         ```bash
