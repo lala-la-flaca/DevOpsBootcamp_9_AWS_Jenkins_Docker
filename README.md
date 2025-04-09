@@ -307,16 +307,41 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
         ```bash
           sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
         ```
+ 2. Add executable permission to the file
+
+    ```bash
+      sudo chmod +x /usr/local/bin/docker-compose
+    ```
+      <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/1%20installing%20docker%20compose%20ec2.png" width=800/>
     
-      <img src="" width=800/>
-    
- 3.  Stop all the running containers and remove existing docker images.
+ 3. Create the docker-compose.yaml file
+
+    ```bash
+
+          version: '3.8'
+          services:
+            java-maven-app:
+              image: lala011/demo-app:jma-5.0
+              ports:
+                - 8080:8080
+          
+            postgres:
+              image: postgres:15
+              ports:
+                - 5432:5432
+          
+              environment:
+                - POSTGRES_PASSWORD=my-pwd
+    ```
+ 4.  Stop all the running containers and remove existing docker images.
     
       ```bash
-        docker stop
-        docker rmi -f 
+        docker ps
+        docker stop <container_ID>
+        docker images
+        docker rmi -f <image_ID>
       ```
-      <img src="" width=800/>
+      <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/2%20cleaning%20ec2%20environment.png" width=800/>
     
  5.  Update the Jenkinsfile to execute the docker-compose command and Copy the docker-compose file.yaml file to the EC2 instance.
     
@@ -337,9 +362,9 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
                   }
               }
       ```
-        <img src="" width=800/>
+        <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/3%20jenkinsfile%20to%20use%20dockercompose.png" width=800/>
     
- 9.  Save and commit the changes to the repository.
+ 6.  Save and commit the changes to the repository.
 
      ```bash
         git add .
@@ -347,9 +372,17 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
         git push
       ```
     
- 11.  Run the Jenkins Job.
+ 7.  Run the Jenkins Job.
 
-       <img src="" width=800/>
+       <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/4%20docker%20compose%20build%20ok.png" width=800/>
+
+8. Verify that the containers are running on the EC2
+
+    ```bash
+      docker ps
+    ```
+  
+  <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/5%20containers%20running%20ec2.png" width=800 />
 
 ### Extract Linux Commands into a separate shell Script
 1. Create a new Shell Script file.
@@ -359,6 +392,7 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
         docker-compose -f docker-compose.yaml up --detach
         echo "success"
     ```
+    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/7%20shell%20script.png" witdh=800 />
     
 3. Update the Jenkins file and modify the variable to call the shell script.
    
@@ -388,6 +422,9 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
           }
       
     ```
+
+    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/6%20running%20many%20commands%20from%20shell.png" witdh=800 />
+    
     
 5. Save and commit the changes to the repository.
 
@@ -396,7 +433,16 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
         git commit -m "Jenkinsfile with docker-compose"
         git push
     ```
-7. Run the Jenkins Job.
+7. Shut down old containers
+
+   ```bash
+   docker-compose -f docker-compose.yaml down
+   ```
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/8%20shutting%20down%20old%20containers.png" width=800 />
+   
+9. Run the Jenkins Job.
+
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/9%20running%20build%20ok.png" width=800/>
    
    
  
