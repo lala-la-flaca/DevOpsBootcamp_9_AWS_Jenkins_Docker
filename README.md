@@ -182,7 +182,7 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
     <img src= "https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/15%20docker%20images%20and%20container%20up%20on%20ec2.png" width=800 />
 
 
-### Modyfing Inboud rules to Security group.
+### Modifying Security Group Inbound Rules.
 1. Open the AWS Management Console and navigate to the EC2 service.
 2. Select the target EC2 instance from the instance list.
 3. Click on the Security Groups associated with the instance.
@@ -299,6 +299,104 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
 7. Access the App from the browser.
 
    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/20%20java-maven%20app%20runing%20on%20ec2%20ok.png" width=800 />
+   
+   
+ ### Using Docker-Compose
+ 1.  Install docker-compose on the EC2 instance.
+
+        ```bash
+          sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+        ```
+    
+      <img src="" width=800/>
+    
+ 3.  Stop all the running containers and remove existing docker images.
+    
+      ```bash
+        docker stop
+        docker rmi -f 
+      ```
+      <img src="" width=800/>
+    
+ 5.  Update the Jenkinsfile to execute the docker-compose command and Copy the docker-compose file.yaml file to the EC2 instance.
+    
+      ```bash
+          stage("deploy") {
+      
+                   steps {
+                      script {
+                          echo "Deploying docker image to EC2"
+                          def dockerComposeCmd = "docker-compose -f docker-compose.yaml up --detach"
+                        
+                          sshagent(['ec2-server-key']) {
+                              sh "scp docker-compose.yaml ec2-user@13.59.163.202:/home/ec2-user"
+                              sh "ssh -o StrictHostKeyChecking=no ec2-user@13.59.163.202 ${dockerComposeCmd}"
+                          }
+      
+                      }
+                  }
+              }
+      ```
+        <img src="" width=800/>
+    
+ 9.  Save and commit the changes to the repository.
+
+     ```bash
+        git add .
+        git commit -m "Jenkinsfile with docker-compose"
+        git push
+      ```
+    
+ 11.  Run the Jenkins Job.
+
+       <img src="" width=800/>
+
+### Extract Linux Commands into a separate shell Script
+1. Create a new Shell Script file.
+2. Add the docker-compose and echo commands to the shell script.
+   
+    ```bash
+        docker-compose -f docker-compose.yaml up --detach
+        echo "success"
+    ```
+    
+3. Update the Jenkins file and modify the variable to call the shell script.
+   
+    ```bash
+      stage("deploy") {
+  
+               steps {
+                  script {
+                      echo "Deploying docker image to EC2"
+  
+                      //calling and passing image parameter to the bash script
+                      def shellCmd = "bash ./server-cmds.sh"
+  
+                      sshagent(['ec2-server-key']) {
+                          //copying shell script to EC2
+                          sh "scp server-cmds.sh ec2-user@13.59.163.202:/home/ec2-user"
+                          
+                          //copying docker-compose.yaml file to EC2
+                          sh "scp docker-compose.yaml ec2-user@13.59.163.202:/home/ec2-user"
+
+                          //Connecting to EC2 via SSH and running docker-compose using the script
+                          sh "ssh -o StrictHostKeyChecking=no ec2-user@13.59.163.202 ${shellCmd}"
+                      }
+  
+                  }
+              }
+          }
+      
+    ```
+    
+5. Save and commit the changes to the repository.
+
+    ```bash
+        git add .
+        git commit -m "Jenkinsfile with docker-compose"
+        git push
+    ```
+7. Run the Jenkins Job.
    
    
  
