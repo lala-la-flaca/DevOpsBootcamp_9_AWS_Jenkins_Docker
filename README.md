@@ -527,7 +527,7 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
 
 6. Run the Job
 
-    <img src="" width=800 />
+    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/10%20job%20ok.png" width=800 />
 
 7. Docker image available in the dockerhub repository
 
