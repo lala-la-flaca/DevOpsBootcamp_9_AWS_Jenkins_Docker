@@ -472,7 +472,7 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
                      }
           }
     ```
-    <img src="" width=800 />
+    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/1%20add%20incrementversion.png" width=800 />
     
  2. Add a stage to Commit Version changes.
     
@@ -499,14 +499,14 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
          }
     
     ```
-    <img src="" width=800 />
+    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/2%20Add%20the%20increment%20version%20stage%20using%20the%20code%20fro%20the%20previous%20demo%208.png" width=800 />
     
  3. Update the shared library to reference only the latest JAR file.
     
     ```bash
     sh 'mvn clean package'
     ```
-    <img src="" width=800 />
+    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/4%20updating%20share%20library%20build.png" width=800 />
     
  4. Update the Docker build and push classes in the shared library to include the repository, as only the tag is currently being passed.
     
@@ -519,24 +519,28 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
       ```bash
       script.sh "docker push lala011/demo-app:$imageName"
     ```
-    <img src="" width=800 />
+    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/5%20updating%20repo%20shared%20library.png" width=800 />
     
- 5. Verify that the Dockerfile specifies both the repository and the tag.
+ 5. Verify that the Docker-compose.yaml file specifies both the repository and the tag.
 
-    <img src="" width=800 />
+    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/9%20dockercompose%20image%20with%20repo.png" width=800 />
 
 6. Run the Job
 
     <img src="" width=800 />
 
-7. Connect to the EC2 instance and verify the container
+7. Docker image available in the dockerhub repository
+
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/8%20image%20dockerhub.png" width=800 />
+   
+9. Connect to the EC2 instance and verify the container
 
     ```bash
     docker ps
     docker images
     ```
 
-    <img src="" width=800 />
+    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/7%20container%20running.png" width=800 />
     
      
   
