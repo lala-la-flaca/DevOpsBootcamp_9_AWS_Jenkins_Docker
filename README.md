@@ -446,4 +446,99 @@ This demo project is part of **Module 9**: **AWS Services** from **Nana DevOps B
    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_9_AWS_Jenkins_Docker/blob/main/Img/9%20running%20build%20ok.png" width=800/>
    
    
+ ### Complete CI/CD Pipeline Using Docker-compose, Dynamic versioning
+ <a id="DynamicVersioning"></a>
  
+ 1. Update the Jenkinsfile to add a new stage named Increment Version.
+    
+    ```bash
+      stages{
+  
+          stage("Increment Version"){
+  
+                     steps{
+                         script{
+                             echo 'Incrementing version'
+  
+                             sh 'mvn build-helper:parse-version versions:set \
+                                 -DnewVersion=\\\${parsedVersion.majorVersion}.\\\${parsedVersion.minorVersion}.\\\${parsedVersion.nextIncrementalVersion} \
+                                 versions:commit'
+  
+                             // Obtaining the docker image name
+                             def matcher = readFile('pom.xml') =~ '<version>(.+)</version>'
+                             def version = matcher[0][1]
+                             env.IMAGE_NAME = "$version-$BUILD_NUMBER"
+                         }
+                     }
+          }
+    ```
+    <img src="" width=800 />
+    
+ 2. Add a stage to Commit Version changes.
+    
+    ```bash
+      stage("commit version update"){
+                      steps{
+                          script{
+                              echo "pushing version to repo..."
+                              withCredentials([usernamePassword(credentialsId: 'gitlab-credentials', passwordVariable: 'PWD', usernameVariable: 'USER')]){
+  
+                                      sh "git config --global user.email 'jenkins@example.com' "
+                                      sh "git config --global user.name 'Jenkins'"
+                                      sh "git status"
+                                      sh "git branch"
+                                      sh "git config --list"
+                                      sh "git remote set-url origin https://$USER:$PWD@gitlab.com/devopsbootcamp4095512/devopsbootcamp_9_aws_jenkins_docker.git"
+                                      sh "git add ."
+                                      sh "git commit -m 'ci: Version Bump '"
+                                      sh "git push origin HEAD:IncrementVersion"
+                              }
+                          }
+  
+                      }
+         }
+    
+    ```
+    <img src="" width=800 />
+    
+ 3. Update the shared library to reference only the latest JAR file.
+    
+    ```bash
+    sh 'mvn clean package'
+    ```
+    <img src="" width=800 />
+    
+ 4. Update the Docker build and push classes in the shared library to include the repository, as only the tag is currently being passed.
+    
+    ```bash
+    script.sh"
+      docker build -t lala011/demo-app:$imageName .
+    "
+    ```
+
+      ```bash
+      script.sh "docker push lala011/demo-app:$imageName"
+    ```
+    <img src="" width=800 />
+    
+ 5. Verify that the Dockerfile specifies both the repository and the tag.
+
+    <img src="" width=800 />
+
+6. Run the Job
+
+    <img src="" width=800 />
+
+7. Connect to the EC2 instance and verify the container
+
+    ```bash
+    docker ps
+    docker images
+    ```
+
+    <img src="" width=800 />
+    
+     
+  
+
+
